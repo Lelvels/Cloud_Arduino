@@ -1,9 +1,8 @@
-#ifndef SENSORDATA_H
-#define SENSORDATA_H
-#include<Arduino.h>
+#ifndef REPORTEDDATA_H
+#define REPORTEDDATA_H
 #include <ArduinoJson.h>
 
-class SensorData
+class ReportedData
 {
 private:
     String ArduinoId;
@@ -14,8 +13,8 @@ private:
     float CO2;
 
 public:
-    SensorData();
-    SensorData(String arduino_id);
+    ReportedData();
+    ReportedData(String arduino_id);
     String toJSON();
     String getArduinoId();
     void setArduinoId(String _ArduinoId);

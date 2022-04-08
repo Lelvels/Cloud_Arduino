@@ -1,107 +1,138 @@
 #include<DesiredData.h>
+#define INIT_VALUE -99
 
+DesiredData::DesiredData(){
+    ArduinoId = "";
+    Humidity = INIT_VALUE;
+    Temperature = INIT_VALUE;
+    SoilMoisture = INIT_VALUE;
+    CO2 = INIT_VALUE;
+    FanInState = false;
+    FanOutState = false;
+    HumidifierState = false;
+    LedState = false;
+}
 
-String getArduinoId()
+DesiredData::DesiredData(String _ArduinoId){
+    ArduinoId = _ArduinoId;
+    Humidity = INIT_VALUE;
+    Temperature = INIT_VALUE;
+    SoilMoisture = INIT_VALUE;
+    CO2 = INIT_VALUE;
+    FanInState = false;
+    FanOutState = false;
+    HumidifierState = false;
+    LedState = false;
+}
+
+void DesiredData::DeserializeJsonDesiredData(String Json){
+    DynamicJsonDocument doc(1024);
+    deserializeJson(doc, Json);
+    char id[10];
+    ArduinoId.toCharArray(id, 10);
+    setTemperature(doc[id]["Temperature"]);
+    setHumidity(doc[id]["Humidity"]);
+}
+//GETTER - SETTER
+String DesiredData::getArduinoId()
 {
     return ArduinoId;
 }
 
-void setArduinoId(String ArduinoId)
+void DesiredData::setArduinoId(String _ArduinoId)
 {
-    ArduinoId = ArduinoId;
+    ArduinoId = _ArduinoId;
 }
 
-float getHumidity()
+float DesiredData::getHumidity()
 {
     return Humidity;
 }
 
-    public
-        void setHumidity(float Humidity)
-        {
-            this.Humidity = Humidity;
-        }
+void DesiredData::setHumidity(float _Humidity)
+{
+    Humidity = _Humidity;
+}
 
-    public
-        float getTemperature()
-        {
-            return this.Temperature;
-        }
+    
+float DesiredData::getTemperature()
+{
+    return Temperature;
+}
 
-    public
-        void setTemperature(float Temperature)
-        {
-            this.Temperature = Temperature;
-        }
+void DesiredData::setTemperature(float _Temperature)
+{
+    Temperature = _Temperature;
+}
 
-    public
-        float getLuminousIntensity()
-        {
-            return this.LuminousIntensity;
-        }
 
-    public
-        void setLuminousIntensity(float LuminousIntensity)
-        {
-            this.LuminousIntensity = LuminousIntensity;
-        }
+float DesiredData::getSoilMoisture()
+{
+    return SoilMoisture;
+}
 
-    public
-        float getSoilMoisture()
-        {
-            return this.SoilMoisture;
-        }
 
-    public
-        void setSoilMoisture(float SoilMoisture)
-        {
-            this.SoilMoisture = SoilMoisture;
-        }
+void DesiredData::setSoilMoisture(float _SoilMoisture)
+{
+    SoilMoisture = _SoilMoisture;
+}
 
-    public
-        float getCO2()
-        {
-            return this.CO2;
-        }
 
-    public
-        void setCO2(float CO2)
-        {
-            this.CO2 = CO2;
-        }
+float DesiredData::getCO2()
+{
+    return CO2;
+}
 
-    public
-        bool isFanInState()
-        {
-            return this.FanInState;
-        }
 
-    public
-        void setFanInState(bool FanInState)
-        {
-            this.FanInState = FanInState;
-        }
+void DesiredData::setCO2(float _CO2)
+{
+    CO2 = CO2;
+}
 
-    public
-        bool isFanOutState()
-        {
-            return this.FanOutState;
-        }
 
-    public
-        void setFanOutState(bool FanOutState)
-        {
-            this.FanOutState = FanOutState;
-        }
+bool DesiredData::isFanInState()
+{
+    return FanInState;
+}
 
-    public
-        bool isHumidifierState()
-        {
-            return this.HumidifierState;
-        }
 
-    public
-        void setHumidifierState(bool HumidifierState)
-        {
-            this.HumidifierState = HumidifierState;
-        }
+void DesiredData::setFanInState(bool _FanInState)
+{
+    FanInState = _FanInState;
+}
+
+
+bool DesiredData::isFanOutState()
+{
+    return FanOutState;
+}
+
+
+void DesiredData::setFanOutState(bool _FanOutState)
+{
+    FanOutState = _FanOutState;
+}
+
+
+bool DesiredData::isHumidifierState()
+{
+    return HumidifierState;
+}
+
+
+void DesiredData::setHumidifierState(bool _HumidifierState)
+{
+    HumidifierState = _HumidifierState;
+}
+
+
+bool DesiredData::isLedState()
+{
+    return LedState;
+}
+
+
+void DesiredData::setLedState(bool _LedState)
+{
+    LedState = _LedState;
+}

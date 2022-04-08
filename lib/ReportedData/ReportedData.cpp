@@ -1,10 +1,9 @@
-#include<SensorData.h>
-#include <ArduinoJson.h>
+#include<ReportedData.h>
 
 #define INIT_VALUE -99
 
 //--Logic--//
-SensorData::SensorData(String _ArduinoId){
+ReportedData::ReportedData(String _ArduinoId){
     ArduinoId = _ArduinoId;
     Humidity = INIT_VALUE;
     Temperature = INIT_VALUE;
@@ -13,7 +12,7 @@ SensorData::SensorData(String _ArduinoId){
     CO2 = INIT_VALUE;
 }
 
-SensorData::SensorData(){
+ReportedData::ReportedData(){
     ArduinoId = "";
     Humidity = INIT_VALUE;
     Temperature = INIT_VALUE;
@@ -22,19 +21,19 @@ SensorData::SensorData(){
     CO2 = INIT_VALUE;
 }
 
-String SensorData::toJSON(){
+String ReportedData::toJSON(){
     String JsonString = "";
     DynamicJsonDocument doc(1024);
 
     if(ArduinoId.length() != 0){
         doc["ArduinoId"] = ArduinoId;
     }
-    if( !(isnan(Humidity) || Humidity == INIT_VALUE) ){
-        doc["Humidity"] = Humidity;
-    } 
     if( !(isnan(Temperature) || Temperature == INIT_VALUE) ){
         doc["Temperature"] = Temperature;
     }
+    if( !(isnan(Humidity) || Humidity == INIT_VALUE) ){
+        doc["Humidity"] = Humidity;
+    } 
     if( !(isnan(LuminousIntensity) || LuminousIntensity == INIT_VALUE) ){
         doc["LuminousIntensity"] = LuminousIntensity;
     }
@@ -49,66 +48,66 @@ String SensorData::toJSON(){
 }
 
 //---GETTER - SETTER---//
-String SensorData::getArduinoId(){
+String ReportedData::getArduinoId(){
     return ArduinoId;
 }
 
-void SensorData::setArduinoId(String _ArduinoId){
+void ReportedData::setArduinoId(String _ArduinoId){
     ArduinoId = _ArduinoId;
 }
 
-float SensorData::getHumidity()
+float ReportedData::getHumidity()
 {
     return Humidity;
 }
 
-void SensorData::setHumidity(float _Humidity)
+void ReportedData::setHumidity(float _Humidity)
 {
     Humidity = _Humidity;
     return;
 }
 
-float SensorData::getTemperature()
+float ReportedData::getTemperature()
 {
     return Temperature;
 }
 
 
-void SensorData::setTemperature(float _Temperature)
+void ReportedData::setTemperature(float _Temperature)
 {
     Temperature = _Temperature;
 }
 
 
-float SensorData::getLuminousIntensity()
+float ReportedData::getLuminousIntensity()
 {
     return LuminousIntensity;
 }
 
 
-void SensorData::setLuminousIntensity(float _LuminousIntensity)
+void ReportedData::setLuminousIntensity(float _LuminousIntensity)
 {
     LuminousIntensity = _LuminousIntensity;
 }
 
 
-float SensorData::getSoilMoisture()
+float ReportedData::getSoilMoisture()
 {
     return SoilMoisture;
 }
 
-void SensorData::setSoilMoisture(float _SoilMoisture)
+void ReportedData::setSoilMoisture(float _SoilMoisture)
 {
     SoilMoisture = _SoilMoisture;
 }
 
 
-float SensorData::getCO2()
+float ReportedData::getCO2()
 {
     return CO2;
 }
 
-void SensorData::setCO2(float _CO2)
+void ReportedData::setCO2(float _CO2)
 {
     CO2 = _CO2;
 }
