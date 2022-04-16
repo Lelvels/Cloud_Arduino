@@ -14,30 +14,31 @@ class DesiredData{
         bool HumidifierState;
         bool LedState;
     public:
-        DesiredData();
         DesiredData(String _ArduinoId);
-        void DeserializeJsonDesiredData(String json);
-
         String getArduinoId();
-        void setArduinoId(String _ArduinoId);
 
         float getHumidity();
-        void setHumidity(float _Humidity);
+        bool setHumidity(float _Humidity);
 
         float getTemperature();
-        void setTemperature(float _Temperature);
+        bool setTemperature(float _Temperature);
 
         float getSoilMoisture();
-        void setSoilMoisture(float _SoilMoisture);
+        bool setSoilMoisture(float _SoilMoisture);
+
         float getCO2();
-        void setCO2(float _CO2);
-        bool isFanInState();
+        bool setCO2(float _CO2);
+
+        bool getFanInState();
         void setFanInState(bool _FanInState);
-        bool isFanOutState();
+
+        bool getFanOutState();
         void setFanOutState(bool _FanOutState);
-        bool isHumidifierState();
+
+        bool getHumidifierState();
         void setHumidifierState(bool _HumidifierState);
-        bool isLedState();
+
+        bool getLedState();
         void setLedState(bool _LedState);
 };
 

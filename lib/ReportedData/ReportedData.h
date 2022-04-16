@@ -15,19 +15,17 @@ private:
 public:
     ReportedData();
     ReportedData(String arduino_id);
-    String toJSON();
     String getArduinoId();
-    void setArduinoId(String _ArduinoId);
     float getHumidity();
-    void setHumidity(float _Humidity);
+    bool setHumidity(float _Humidity);
     float getTemperature();
-    void setTemperature(float _Temperature);
+    bool setTemperature(float _Temperature);
     float getLuminousIntensity();
-    void setLuminousIntensity(float _LuminousIntensity);
+    bool setLuminousIntensity(float _LuminousIntensity);
     float getSoilMoisture();
-    void setSoilMoisture(float _SoilMoisture);
+    bool setSoilMoisture(float _SoilMoisture);
     float getCO2();
-    void setCO2(float _CO2);
+    bool setCO2(float _CO2);
 };
 
 #endif

@@ -1,37 +1,16 @@
 #include<DesiredData.h>
-#define INIT_VALUE -99
-
-DesiredData::DesiredData(){
-    ArduinoId = "";
-    Humidity = INIT_VALUE;
-    Temperature = INIT_VALUE;
-    SoilMoisture = INIT_VALUE;
-    CO2 = INIT_VALUE;
-    FanInState = false;
-    FanOutState = false;
-    HumidifierState = false;
-    LedState = false;
-}
+#define INIT_VALUE 0
 
 DesiredData::DesiredData(String _ArduinoId){
     ArduinoId = _ArduinoId;
-    Humidity = INIT_VALUE;
-    Temperature = INIT_VALUE;
-    SoilMoisture = INIT_VALUE;
-    CO2 = INIT_VALUE;
+    Humidity = 80;
+    Temperature = 20;
+    SoilMoisture = 0; //Tính theo phần trăm
+    CO2 = 3000; //ppm //lớn hơn 3000 thì khởi động quạt
     FanInState = false;
     FanOutState = false;
     HumidifierState = false;
     LedState = false;
-}
-
-void DesiredData::DeserializeJsonDesiredData(String Json){
-    DynamicJsonDocument doc(1024);
-    deserializeJson(doc, Json);
-    char id[10];
-    ArduinoId.toCharArray(id, 10);
-    setTemperature(doc[id]["Temperature"]);
-    setHumidity(doc[id]["Humidity"]);
 }
 //GETTER - SETTER
 String DesiredData::getArduinoId()
@@ -39,30 +18,32 @@ String DesiredData::getArduinoId()
     return ArduinoId;
 }
 
-void DesiredData::setArduinoId(String _ArduinoId)
-{
-    ArduinoId = _ArduinoId;
-}
-
 float DesiredData::getHumidity()
 {
     return Humidity;
 }
 
-void DesiredData::setHumidity(float _Humidity)
+bool DesiredData::setHumidity(float _Humidity)
 {
-    Humidity = _Humidity;
+    if(_Humidity >= 20 && _Humidity <= 80){
+        Humidity = _Humidity;
+        return true;
+    }
+    return false;
 }
-
-    
+ 
 float DesiredData::getTemperature()
 {
     return Temperature;
 }
 
-void DesiredData::setTemperature(float _Temperature)
+bool DesiredData::setTemperature(float _Temperature)
 {
-    Temperature = _Temperature;
+    if(_Temperature >= 10 && _Temperature <= 40){
+        Temperature = _Temperature;
+        return true;
+    }
+    return false;
 }
 
 
@@ -72,9 +53,13 @@ float DesiredData::getSoilMoisture()
 }
 
 
-void DesiredData::setSoilMoisture(float _SoilMoisture)
+bool DesiredData::setSoilMoisture(float _SoilMoisture)
 {
-    SoilMoisture = _SoilMoisture;
+    if(_SoilMoisture > 30 && _SoilMoisture < 100){
+        SoilMoisture = _SoilMoisture;
+        return true;
+    }
+    return false;
 }
 
 
@@ -84,13 +69,17 @@ float DesiredData::getCO2()
 }
 
 
-void DesiredData::setCO2(float _CO2)
+bool DesiredData::setCO2(float _CO2)
 {
-    CO2 = CO2;
+    if(_CO2 >= 1000 && _CO2 <= 10000){
+        CO2 = _CO2;
+        return true;
+    }
+    return false;
 }
 
 
-bool DesiredData::isFanInState()
+bool DesiredData::getFanInState()
 {
     return FanInState;
 }
@@ -102,7 +91,7 @@ void DesiredData::setFanInState(bool _FanInState)
 }
 
 
-bool DesiredData::isFanOutState()
+bool DesiredData::getFanOutState()
 {
     return FanOutState;
 }
@@ -114,7 +103,7 @@ void DesiredData::setFanOutState(bool _FanOutState)
 }
 
 
-bool DesiredData::isHumidifierState()
+bool DesiredData::getHumidifierState()
 {
     return HumidifierState;
 }
@@ -126,7 +115,7 @@ void DesiredData::setHumidifierState(bool _HumidifierState)
 }
 
 
-bool DesiredData::isLedState()
+bool DesiredData::getLedState()
 {
     return LedState;
 }
