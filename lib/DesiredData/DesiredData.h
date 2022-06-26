@@ -4,42 +4,38 @@
 
 class DesiredData{
     private:
-        String ArduinoId;
-        float Humidity;
+        String DeviceId;
         float Temperature;
-        float SoilMoisture;
-        float CO2;
-        bool FanInState;
-        bool FanOutState;
-        bool HumidifierState;
+        float MinHumidity;
+        float MaxHumidity;
+        float MinCO2;
+        float MaxCO2;
         bool LedState;
+        bool Disable;
     public:
-        DesiredData(String _ArduinoId);
-        String getArduinoId();
+        DesiredData(String _DeviceId);
+        String getDeviceId();
 
-        float getHumidity();
-        bool setHumidity(float _Humidity);
+        float getMinHumidity();
+        bool setMinHumidity(float minHumidity);
+
+        float getMaxHumidity();
+        bool setMaxHumidity(float maxHumidity);
 
         float getTemperature();
         bool setTemperature(float _Temperature);
 
-        float getSoilMoisture();
-        bool setSoilMoisture(float _SoilMoisture);
+        float getMinCO2();
+        bool setMinCO2(float minCO2);
 
-        float getCO2();
-        bool setCO2(float _CO2);
-
-        bool getFanInState();
-        void setFanInState(bool _FanInState);
-
-        bool getFanOutState();
-        void setFanOutState(bool _FanOutState);
-
-        bool getHumidifierState();
-        void setHumidifierState(bool _HumidifierState);
+        float getMaxCO2();
+        bool setMaxCO2(float maxCO2);
 
         bool getLedState();
         void setLedState(bool _LedState);
+
+        bool isDisable();
+        void setDisable(bool _Disable);
 };
 
 #endif

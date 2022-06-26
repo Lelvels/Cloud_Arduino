@@ -3,18 +3,17 @@
 #define INIT_VALUE 0
 
 //--Logic--//
-ReportedData::ReportedData(String _ArduinoId){
-    ArduinoId = _ArduinoId;
+ReportedData::ReportedData(String _DeviceId){
+    DeviceId = _DeviceId;
     Humidity = INIT_VALUE;
     Temperature = INIT_VALUE;
-    LuminousIntensity = INIT_VALUE;
     SoilMoisture = INIT_VALUE;
     CO2 = INIT_VALUE;
 }
 
 //---GETTER - SETTER---//
-String ReportedData::getArduinoId(){
-    return ArduinoId;
+String ReportedData::getDeviceId(){
+    return DeviceId;
 }
 
 float ReportedData::getHumidity()
@@ -24,8 +23,11 @@ float ReportedData::getHumidity()
 
 bool ReportedData::setHumidity(float _Humidity)
 {
-    Humidity = _Humidity;
-    return true;
+    if(!isnan(_Humidity) && _Humidity >= 0){
+        Humidity = _Humidity;
+        return true;
+    }
+    return false;
 }
 
 float ReportedData::getTemperature()
@@ -36,23 +38,12 @@ float ReportedData::getTemperature()
 
 bool ReportedData::setTemperature(float _Temperature)
 {
-    Temperature = _Temperature;
-    return true;
+    if(!isnan(_Temperature) && _Temperature >= 0){
+        Temperature = _Temperature;
+        return true;
+    }
+    return false;
 }
-
-
-float ReportedData::getLuminousIntensity()
-{
-    return LuminousIntensity;
-}
-
-
-bool ReportedData::setLuminousIntensity(float _LuminousIntensity)
-{
-    LuminousIntensity = _LuminousIntensity;
-    return true;
-}
-
 
 float ReportedData::getSoilMoisture()
 {
@@ -73,6 +64,9 @@ float ReportedData::getCO2()
 
 bool ReportedData::setCO2(float _CO2)
 {
-    CO2 = _CO2;
-    return true;
+    if(!isnan(_CO2) && _CO2 >= 0 && _CO2 <= 10000){
+        CO2 = _CO2;
+        return true;
+    }
+    return false;
 }
